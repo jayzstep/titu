@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %} Register a New User {% endblock %}
+
+{% block content %}
+<h1>Register a New User</h1>
+<!-- This: -->
+{% comment %}
+<form class="form-with-validation" action="/users/register/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button>Submit</button>
+</form>
+{% endcomment %}
+
+<!-- Not this: -->
+<form class="form-with-validation" action="/users/register/" method="post">
+  {% csrf_token %}
+  <label for="username">Username:</label>
+  <input type="text" name="username" id="username" required><br>
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" id="password" required><br>
+
+  <button>Submit</button>
+</form
+{% endblock %}
