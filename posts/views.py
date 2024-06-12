@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from . import forms 
+from datetime import datetime
+from django.utils import timezone
 
 # Create your views here.
 #@login_required(login_url="/users/login/")
@@ -19,6 +22,10 @@ def post_new(request):
     if request.method == 'POST':
         form = forms.CreatePost(request.POST)
         if form.is_valid():
+            # current_date = timezone.localtime(timezone.now())
+            # post_amount_today = Post.objects.filter(author=request.user, date__date=current_date).count()
+            # if post_amount_today > 10:
+            #     return HttpResponse("Error, too many messages sent today")
             newpost = form.save(commit=False)
             newpost.author = request.user
             newpost.save()
